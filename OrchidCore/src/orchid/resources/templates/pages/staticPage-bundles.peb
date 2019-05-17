@@ -1,14 +1,22 @@
-{% extends 'pages/base_plugin.peb' %}
+<div class="box">
+{% include 'includes/pluginPageHeader.peb' %}
 
-{% block afterDependency %}
-<div class="list-group">
-{% for pluginItem in included %}
-{% set pageUrl = link(pluginItem.pluginName, 'pages', pluginItem.pluginType) %}
+  <div class="content is-medium">
+  {{ page.content | raw }}
+  </div>
 
-{% if pageUrl is not empty %}
-  <a class="list-group-item" href="{{ pageUrl }}">{{ pluginItem.pluginName }}</a>
-{% endif %}
-{% endfor %}
+  <h3 class="subtitle">Includes the following: </h3>
+  <nav class="menu" style="margin-bottom: 1.5rem;">
+    <ul class="menu-list">
+    {% for pluginItem in included %}
+    {% set pageUrl = link(pluginItem.pluginName, 'pages', pluginItem.pluginType) %}
+
+    {% if pageUrl is not empty %}
+      <li><a href="{{ pageUrl }}">{{ pluginItem.pluginName }}</a></li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+  </nav>
+
+{% include 'includes/dependencyTabs.peb' %}
 </div>
-{% endblock %}
-

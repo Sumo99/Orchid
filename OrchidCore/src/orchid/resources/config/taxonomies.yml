@@ -19,9 +19,5 @@ taxonomies:
         - 'title'
 
 # Page configurations
-taxonomyArchivePages:
-  extraCss:
-    - 'assets/css/plugins.scss'
 termArchivePages:
-  extraCss:
-    - 'assets/css/plugins.scss'
+  layout: noBoxNoTitle

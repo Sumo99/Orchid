@@ -1,12 +1,26 @@
-{% extends 'includes/termArchive-group-baseLinked' %}
+<div>
 
-{% block cardBody %}
-<div class="plugin-preview">
-    <div class="summary">
-        <div class="title">{{ page.title }}</div>
-        <div class="description">{{ page.description }}</div>
+  <div class="columns is-multiline is-centered" id="plugin-list">
+    <div class="column is-half-desktop">
+    {% include 'blocks/previewCardControls.peb' with {
+    'mediaFile': 'undraw_following_q0cr.svg',
+    'items': page.pageList,
+    'id': 'plugin-list'
+    } %}
     </div>
-    {% set previewImage = page.images|first %}
-    <img class="img-responsive" src="{{ previewImage.src }}" alt="{{ previewImage.title }}">
+
+    {% for pageItem in page.pageList %}
+    {% set tagString = '' %}
+    {% for tag in pageItem.tags %}
+      {% set tagString = tagString~','~tag %}
+    {% endfor %}
+      <div class="column is-half-desktop" data-tags="{{ tagString }}" style="display: flex;">
+        <a href="{{ pageItem.link }}" style="text-align: center; flex-grow: 1; flex-shrink: 0; align-self: flex-end;">
+        {% set previewImage = pageItem.get('images')|first %}
+        {% include 'blocks/previewCard.peb' with {'title': pageItem.title, 'mediaUrl': previewImage.src, 'ctaName': 'Learn More'} %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
 </div>
-{% endblock %}

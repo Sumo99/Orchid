@@ -1,3 +1,5 @@
+layout: noBoxNoTitle
+
 menu:
   - type: 'page'
   - type: 'pageChildren'

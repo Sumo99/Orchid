@@ -1,8 +1,26 @@
-{% extends 'includes/termArchive-group-baseLinked' %}
+<div>
 
-{% block cardBody %}
-<div class="plugin-preview">
-  {% set previewImage = page.images|first %}
-  <img class="img-responsive" src="{{ previewImage.src }}" alt="{{ page.title }}">
+  <div class="columns is-multiline is-centered" id="theme-list">
+    <div class="column is-half-desktop">
+    {% include 'blocks/previewCardControls.peb' with {
+    'mediaFile': 'undraw_creativity_wqmm.svg',
+    'items': page.pageList,
+    'id': 'theme-list'
+    } %}
+    </div>
+
+    {% for pageItem in page.pageList %}
+    {% set tagString = '' %}
+    {% for tag in pageItem.tags %}
+      {% set tagString = tagString~','~tag %}
+    {% endfor %}
+      <div class="column is-half-desktop" data-tags="{{ tagString }}" style="display: flex;">
+        <a href="{{ pageItem.link }}" style="text-align: center; flex-grow: 1; flex-shrink: 0; align-self: flex-end;">
+        {% set previewImage = pageItem.get('images')|first %}
+        {% include 'blocks/previewCard.peb' with {'title': pageItem.title, 'mediaUrl': previewImage.src, 'ctaName': 'Learn More'} %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
 </div>
-{% endblock %}
